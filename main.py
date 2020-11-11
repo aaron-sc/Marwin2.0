@@ -114,48 +114,6 @@ async def ping(ctx):
 	except:
 		await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
 
-# Server Member Commands
-
-@bot.command(pass_context=True)
-@commands.has_any_role("Server Member")
-async def follow(ctx, user):
-	''' Follow a user [~follow @user - MUST BE A SERVER MEMBER]'''
-	settings_data, guild_id = get_data(), str(ctx.message.guild.id)
-	toFollow = get_user_id(user)
-	author = ctx.message.author
-	if(check_if_valid_user_at(user)):
-		if(toFollow in settings_data[guild_id]["follower_roles"]):
-			role = int(settings_data[guild_id]["follower_roles"][toFollow])
-			try:
-				await author.add_roles(discord.utils.get(author.guild.roles, id=role))
-				await ctx.send('{0} You are now following that user!'.format(ctx.author.mention))
-			except:
-				await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
-		else:
-			await ctx.send('Hey {0} that\'s not a valid user! Either they\'re not a content creator, or they haven\'t set that up.'.format(ctx.author.mention))
-	else:
-		await ctx.send('Hey {0} that\'s not a valid user!.'.format(ctx.author.mention))
-
-
-@bot.command(pass_context=True)
-@commands.has_any_role("Server Member")
-async def unfollow(ctx, user):
-	''' Follow a user [~unfollow @user - MUST BE A CONTENT CREATOR]'''
-	settings_data, guild_id = get_data(), str(ctx.message.guild.id)
-	toFollow = get_user_id(user)
-	author = ctx.message.author
-	if(check_if_valid_user_at(user)):
-		if(toFollow in settings_data[guild_id]["follower_roles"]):
-			role = int(settings_data[guild_id]["follower_roles"][toFollow])
-			try:
-				await author.remove_roles(discord.utils.get(author.guild.roles, id=role))
-				await ctx.send('{0} You are unfollowed that user!'.format(ctx.author.mention))
-			except:
-				await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
-		else:
-			await ctx.send('Hey {0} that\'s not a valid user! Either they\'re not a content creator, or they haven\'t set that up.'.format(ctx.author.mention))
-	else:
-		await ctx.send('Hey {0} that\'s not a valid user!.'.format(ctx.author.mention))
 
 @bot.command(pass_context=True)
 async def six_dice(ctx):
@@ -243,6 +201,49 @@ async def accept_terms(ctx):
 	except:
 		await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
 
+
+# Server Member Commands
+
+@bot.command(pass_context=True)
+@commands.has_any_role("Server Member")
+async def follow(ctx, user):
+	''' Follow a user [~follow @user - MUST BE A SERVER MEMBER]'''
+	settings_data, guild_id = get_data(), str(ctx.message.guild.id)
+	toFollow = get_user_id(user)
+	author = ctx.message.author
+	if(check_if_valid_user_at(user)):
+		if(toFollow in settings_data[guild_id]["follower_roles"]):
+			role = int(settings_data[guild_id]["follower_roles"][toFollow])
+			try:
+				await author.add_roles(discord.utils.get(author.guild.roles, id=role))
+				await ctx.send('{0} You are now following that user!'.format(ctx.author.mention))
+			except:
+				await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
+		else:
+			await ctx.send('Hey {0} that\'s not a valid user! Either they\'re not a content creator, or they haven\'t set that up.'.format(ctx.author.mention))
+	else:
+		await ctx.send('Hey {0} that\'s not a valid user!.'.format(ctx.author.mention))
+
+
+@bot.command(pass_context=True)
+@commands.has_any_role("Server Member")
+async def unfollow(ctx, user):
+	''' Follow a user [~unfollow @user - MUST BE A CONTENT CREATOR]'''
+	settings_data, guild_id = get_data(), str(ctx.message.guild.id)
+	toFollow = get_user_id(user)
+	author = ctx.message.author
+	if(check_if_valid_user_at(user)):
+		if(toFollow in settings_data[guild_id]["follower_roles"]):
+			role = int(settings_data[guild_id]["follower_roles"][toFollow])
+			try:
+				await author.remove_roles(discord.utils.get(author.guild.roles, id=role))
+				await ctx.send('{0} You are unfollowed that user!'.format(ctx.author.mention))
+			except:
+				await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
+		else:
+			await ctx.send('Hey {0} that\'s not a valid user! Either they\'re not a content creator, or they haven\'t set that up.'.format(ctx.author.mention))
+	else:
+		await ctx.send('Hey {0} that\'s not a valid user!.'.format(ctx.author.mention))
 
 # BELOW ARE ADMIN COMMANDS
 
