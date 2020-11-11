@@ -237,7 +237,7 @@ async def unfollow(ctx, user):
 			role = int(settings_data[guild_id]["follower_roles"][toFollow])
 			try:
 				await author.remove_roles(discord.utils.get(author.guild.roles, id=role))
-				await ctx.send('{0} You are unfollowed that user!'.format(ctx.author.mention))
+				await ctx.send('{0} You unfollowed that user!'.format(ctx.author.mention))
 			except:
 				await ctx.send('{0} An error occured, make sure you have given me the proper permissions!'.format(ctx.author.mention))
 		else:
