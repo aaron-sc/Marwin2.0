@@ -1,0 +1,11 @@
+[Service]
+WorkingDirectory=/home/pi/discordbot
+ExecStart=sudo python3.7 /home/pi/discordbot/main.py
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=marwin
+User=root
+Group=root
+Environment=NODE_ENV=production
+[Install]
